@@ -59,14 +59,21 @@ func (elist *list)ShowData() {
 
 func (elist *list)GraphData() {
 	auxiliar := elist.first
-	var graph string = "digraph List {\n"
-	graph += "rankdir=LR;"
+	//la variable graph me ayudara a guardar toda el codigo del grafico.
+	var graph string = "digraph List {\n" //Este es el encabezado no debe cambiar nada solo se puede cambiar el nombre List por el de 
+					     // de su preferencia lo demás se queda así.
+	graph += "rankdir=LR;" //Esto es solo para que la grafica se ordene en modo horizontal, puede cambiar si es necesario si se quiere
+				//vertical se cambia LR por TB.
+	//Esta linea es para modificar como se ve el nodo tanto el color interno como los bordes.
 	graph += "node [shape = record, color=blue , style=filled, fillcolor=skyblue];"
-	var nodes string = ""
-	var pointers string = ""
+	var nodes string = "" //Manejara todos los nodos la declaracion
+	var pointers string = "" //Manejara todos los punteros y conexiones, es mejor separarlo para que no haya conflicto luego.
 	for auxiliar != nil {
+		//Como los nodos deben tener un nombre unico entonces le concatene su valor, entonces si un nodo tiene dentro un 5 entonces
+		//se llamaria node5 y ahora bien el label es lo que tendra dentro del nodo aqui puede ir el nombre de la tienda.
 		nodes += "Node" + strconv.Itoa(auxiliar.value) + "[label=\"" + strconv.Itoa(auxiliar.value) + "\"]\n"
 		if auxiliar.next != nil{
+			//Aqui se almacenan los punteros permite apuntar del actual al siguiente
 			pointers += "Node" + strconv.Itoa(auxiliar.value) + "->Node" + strconv.Itoa(auxiliar.next.value) + ";\n"
 		}
 		auxiliar = auxiliar.next
